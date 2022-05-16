@@ -12,7 +12,7 @@ startMenu();
 function startMenu() {
 
     console.log('Sono disponibili tre opzioni');
-    console.log('1)  Aggiungi un libro');
+    console.log('1)  Aggiungi una pubblicazione');
     console.log('2)  Lista dei libri');
     console.log('3)  Esci');
 
@@ -33,9 +33,9 @@ const schema = {
 
   function startMenuManager(err, result) {
       if (result.selection === '1') {
-          insertBook()
+        addPublication();
       } else if (result.selection === '2') {
-          
+          printBooks(bookArray);
       } else if (result.selection === '3') {
         console.log('Grazie e a presto!')
         process.exit();
@@ -44,6 +44,42 @@ const schema = {
           startMenu();
       }
   }
+
+  function addPublication() {
+
+    console.log('Sono disponibili tre opzioni');
+    console.log('1)  Aggiungi una rivista');
+    console.log('2)  Aggiungi un libro');
+    console.log('3)  Esci');
+
+    prompt.start();
+
+const schema = {
+    properties: {
+      selection: {
+        description: 'Seleziona una delle opzioni',
+      }
+    }
+  };
+
+  prompt.get(schema, startAddPublication);
+
+}
+
+function startAddPublication(err, result) {
+    if (result.selection === '1') {
+        insertMagazine();
+    } else if (result.selection === '2') {
+        insertBook();
+    } else if (result.selection === '3') {
+        startMenuManager();
+    } else {
+        console.log('Selezione non disponibile');
+        addPublication();
+    }
+}
+
+
 
   function insertBook() {
     const schema = {
@@ -67,3 +103,42 @@ const schema = {
       bookArray.push(book);
       startMenu();
   }
+
+  function insertMagazine() {
+    const schema = {
+        properties: {
+          title: {
+            description: 'Inserisci il titolo',
+          },
+          publisher: {
+            description: 'Inserisci la casa editrice',
+          },
+          realease: {
+            description: 'Inserisci il data di pubblicazione',
+          },
+          periodicy: {
+            description: 'Inserisci il frequenza di uscita',
+          },
+          type: {
+            description: 'Inserisci il tipologia',
+          },
+          price: {
+            description: 'Inserisci la prezzo',
+          },
+        }};
+    
+      prompt.get(schema, insertMagazineManager);
+  }
+
+  function insertMagazineManager(err, result) {
+      const book = new model.Book(result.title, result.publisher, result.realease, result.periodicy, result.type, result.price);
+      bookArray.push(book);
+      startMenu();
+  }
+
+
+function printBooks(bookArray) {
+    for (const book of bookArray) {
+        console.log(book.toString())
+    }
+}
