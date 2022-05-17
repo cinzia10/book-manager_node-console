@@ -57,8 +57,6 @@ function addPublication() {
     console.log('2)  Aggiungi un libro');
     console.log('3)  Torna indietro');
 
-    prompt.start();
-
   const schema = {
     properties: {
       selection: {
@@ -90,18 +88,37 @@ function insertBook() {
           title: {
             description: 'Inserisci il titolo',
           },
+          publisher: {
+            description: 'Inserisci la casa editrice',
+          },
+          type: {
+            description: 'Inserisci il genere',
+          },
+          price: {
+            description: 'Inserisci il prezzo',
+          },
+          copies: {
+            description: 'Inserisci il numero di copie',
+          },
+          discount: {
+            description: 'Inserisci lo sconto',
+          },
           author: {
             description: 'Inserisci l\'autore',
           },
-          publisher: {
-            description: 'Inserisci la casa editrice',
-          }
+          pages: {
+            description: 'Inserisci il numero di pagine',
+          },
+          yop: {
+            description: 'Inserisci l\'anno di pubblicazione',
+          },
+         
         }};
     
       prompt.get(schema, insertBookManager);
 }
 function insertBookManager(err, result) {
-      const book = new model.Book(result.title, result.author, result.publisher);
+      const book = new model.Book(result.title, result.author, result.publisher, result.type, result.price, result.copies, result.pages, result.yop, result.discount);
       bookArray.push(book);
       startMenu();
 }
@@ -148,8 +165,6 @@ function publicationMenu() {
   console.log('3)  Visualizza tutte le pubblicazioni');
   console.log('4)  Torna indietro');
 
-  prompt.start();
-
 const schema = {
   properties: {
     selection: {
@@ -186,8 +201,6 @@ function viewPublication() {
   console.log('1)  Visualizza in ordine alfabetico');
   console.log('2)  Visualizza in ordine di pubblicazione');
   console.log('3)  Torna indietro');
-
-  prompt.start();
 
 const schema = {
   properties: {

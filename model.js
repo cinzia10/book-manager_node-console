@@ -92,7 +92,7 @@ class Publication{
     constructor(title, publisher, release, periodicy, type, price, copies, discount, /*releaseDate*/){
       super(title, publisher, type, price, copies, discount, 20);
       this.release = release;
-      // this.periodicy = periodicy;
+      this.periodicy = periodicy;
       // this._releaseDate = releaseDate.getTime();
     }
   
