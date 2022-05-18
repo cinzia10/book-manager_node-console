@@ -1,0 +1,14 @@
+[
+    {
+        "title": "libro1",
+        "publisher": "",
+        "type": "horror",
+        "price": 15,
+        "copies": 58,
+        "discount": 1,
+        "tax": 10,
+        "author": "",
+        "pages": 475,
+        "yop": 2011
+    }
+]
